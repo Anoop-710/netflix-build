@@ -1,18 +1,36 @@
 import React from 'react'
 import './Banner.css'
+import axios from '../../axios';
+import requests from '../../Requests';
 
 const Banner = () => {
 
-    // function to restrict the description
+    const [movie,setMovie] = React.useState([]);
 
+    React.useEffect(()=>{
+        async function fetchData() {
+            const request = await axios.get(requests.fetchNetflixOriginals);
+            setMovie(
+                request.data.results[
+                    Math.floor(Math.random() * request.data.results.length-1)
+                ]
+            );
+            return request;
+        }
+        fetchData();
+    },[]);
+
+    console.log(movie)
+
+    // function to restrict the description
     function truncate(string,n){
         return string?.length > 150 ? string.substr(0,n-1) + '...' : string;
     }
 
   return (
     <header className='banner' style={{
-        background: `url('https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bmV0ZmxpeHxlbnwwfHwwfHw%3D&w=1000&q=80)`,
         // backgroundSize: 'cover',
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         backgroundPosition: 'center center',
     }}>
         <div className="banner-contents">
