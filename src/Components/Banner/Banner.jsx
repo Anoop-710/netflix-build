@@ -35,7 +35,7 @@ const Banner = () => {
     }}>
         <div className="banner-contents">
             <h1 className="banner-title">
-                Movie name
+                {movie?.title || movie?.name || movie?.original_name}
             </h1>
             <button className="banner-buttons">
                 <button className='banner-button'>Play</button>
@@ -43,7 +43,7 @@ const Banner = () => {
             </button>
             <h1 className="banner-description">
 
-                {truncate('Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt iusto ex, possimus, illo quo sunt, atque aliquam amet minus eos reiciendis! Dolore sint tempora sed atque quis aliquid soluta voluptatum?' , 150)}
+                {truncate(movie?.overview , 150)}
             </h1>
         </div>
 
